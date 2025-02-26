@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>    
+        table{
+            width: 50%; 
+            border-collapse: collapse;
+            background-color: rgb(43, 43, 43);
+        }
+    
+        #tableTokens th, #tableTokens td{
+            text-align: center;
+            color: rgb(5, 168, 168);
+        }
+
+        #tableErrores th, #tableErrores td{
+            text-align: center;
+            color: red;
+        }
+
+        #tableRecuento th, #tableRecuento td{
+            text-align: center;
+            color:  rgb(6, 243, 6);
+        }
+    </style>
+
+    <Title>Analizador Lexico</Title>
+</head>
+
+<body style="background-color: rgb(43, 43, 43);">
+    <center>
+        <h1 style="color: aqua;">Analizador Lexico</h1>
+    </center>
+
+    <center>
+        <h3 style="color: aliceblue; display: inline-block; margin-right: 10px;">Buscar Palabra: </h3>
+        <input type="text" name="campoTexto" id="textField">
+        <button id="btnSearch" style="color: darkturquoise; font-size: 20px;">Buscar</button>
+    </center>
+
+    <center>
+        <textarea name="textarea" id="textarea" rows="20" cols="75"  placeholder="INGRESE TEXTO PARA ANALIZAR" oninput="copyText()"></textarea>
+        <textarea name="textarea2" id="textarea2" rows="20" cols="75"  readonly  style="background-color: rgb(58, 58, 58); color: aliceblue;"></textarea>
+    </center>
+    </br>
+    <center>
+        <button id="btnAnalizar" style="background-color: rgb(61, 255, 61); font-size: 20px;">Analiza Archivo</button>
+        <button id="btnSubmit" style="background-color: rgb(10, 243, 243); font-size: 20px;" onclick="copyText()">Subir Archivo</button>
+        <input type="file" id="fileInput" style="display: none;">
+        <p id="nombreArchivo" style="color: aliceblue;">Ningún archivo seleccionado</p>
+    </center>
+    </br>
+    <center>
+        <button id="btnChangeTxt" style="background-color: rgb(250, 194, 41); font-size: 20px;">Descargar Archivo con Cambios</button>
+    </center>
+    </br>
+
+    <center>
+        <div class="tabla-contenedor">
+            <h3 style="color: aqua; font-size: 20px;">REPORTE DE TOKENS</h3>
+            <table border="1" id="tableTokens">
+                <tr>
+                    <th>Token</th>
+                    <th>Lexema</th>
+                    <th>Fila</th>
+                    <th>Columna</th>
+                </tr>
+                <tbody id="tabla-lexemas">
+                    <tr id="mensaje-lexemas">
+                        <th colspan="4">AUN NO SE HA ANALIZADO EL TEXTO</th>
+                    </tr>
+                </tbody>
+            </table>
+        </br>
+            <button id="btnDownloadTokens" style="background-color: rgb(10, 243, 243); font-size: 20px;">DESCARGAR REPORTE DE TOKENS</button>
+        </br>
+            <h3 style="color: rgb(252, 43, 28); font-size: 20px;">REPORTE DE ERRORES</h3>
+            <table border="1" id="tableErrores">
+                <tr>
+                    <th>Cadena</th>
+                    <th>Columna</th>
+                    <th>Fila</th>
+                </tr>
+                <tbody id="tabla-errores">
+                    <tr id="mensaje-errores">
+                        <th colspan="3">AUN NO SE HA ANALIZADO EL TEXTO</th>
+                    </tr>
+                </tbody>
+            </table>
+        </br>
+            <button id="btnDownloadError" style="background-color: rgb(252, 43, 28); font-size: 20px;">DESCARGAR REPORTE DE ERRORES</button>
+        </br>
+            <h3 style="color: rgb(6, 243, 6); font-size: 20px;">RECUENTO DE LEXEMAS</h3>
+            <table border="1" id="tableRecuento">
+                <tr>
+                    <th>Lexema</th>
+                    <th>Cantidad</th>
+                </tr>
+                <tbody id="tabla-recuento">
+                    <tr id="mensaje-recuento">
+                        <th colspan="2">AUN NO SE HA ANALIZADO EL TEXTO</th>
+                    </tr>
+                </tbody>
+            </table>
+        </br>
+        <button id="btnDownloadError" style="background-color: rgb(6, 243, 6); font-size: 20px;">DESCARGAR REPORTE RECUENTO DE TOKENS</button>
+        </div>
+    </center>
+
+    <script>
+        function copyText(){
+            document.getElementById("textarea2").value = document.getElementById("textarea").value;
+        }
+    </script>
+
+    <!--Enlace al achivo con la logica de ManejoDeArchivos.js-->
+    <script src="./js/ManejoDeArchivos.js"></script>
+    <script src="./js/BuscadorPalabra.js"></script>
+    <script type="module" src="./js/Analizador.js"></script>
+</body>
+
+</html>
