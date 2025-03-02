@@ -3,7 +3,6 @@ import { Token } from "./Token.js";
 const token = new Token();
 
 var letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-var digitos = "0123456789".split("");
 var signosPuntuacion = [".", ",", ";", ":"];
 var operadoresAritmeticos = ["^", "*", "/", "+", "-"];
 var operadoresRacionales = ["<", ">", "<=", ">="];
@@ -40,9 +39,15 @@ function tokenYlexemas(entrada) {
         for (let parte of partes) {
             // Procesar cada palabra (parte)
             let num = parseInt(parte, 10);
-            
-            if (letras.some(letra => parte.toUpperCase().startsWith(letra)) && (parte !== "AND" && parte !== "OR")) {
+            if (letras.some(letra => parte.toUpperCase().startsWith(letra)) && (parte !== "AND" && parte !== "OR" && parte !== "_")) {
                 //Si entra a la condicion entonces se creara un nuevo Token
+                partes = parte.split("");
+                for(let i=0; i < partes.length; i++){
+                    if(partes[i] === "_"){
+                        errores.push({ cadena: parte, fila, columna });
+                        break;
+                    } 
+                }
                 lexemas.push(new Token(parte, "Identificador", fila, columna));
             } else if (num < 10 || num > 0) {
                 lexemas.push(new Token(parte, "Número", fila, columna));
@@ -61,16 +66,13 @@ function tokenYlexemas(entrada) {
             } else {
                 errores.push({ cadena: parte, fila, columna });
             }
-
             // Actualizamos la columna en función del tamaño de la palabra
             columna = columna + parte.length + 1; // +1 por el espacio
         }
-
         // Al final de cada línea, aumentamos la fila y reiniciamos la columna
         fila++;
         columna = 1;
     }
-
     return { lexemas, errores };
 }
 /**
