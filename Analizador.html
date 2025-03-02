@@ -45,6 +45,7 @@
         <textarea name="textarea2" id="textarea2" rows="20" cols="75"  readonly  style="background-color: rgb(58, 58, 58); color: aliceblue;"></textarea>
     </center>
     </br>
+    <center> <p id="resultado" style="color: aliceblue;">No se ha buscado ninguna palabra o simbolo</p> </center>
     <center>
         <button id="btnAnalizar" style="background-color: rgb(61, 255, 61); font-size: 20px;">Analiza Archivo</button>
         <button id="btnSubmit" style="background-color: rgb(10, 243, 243); font-size: 20px;" onclick="copyText()">Subir Archivo</button>
@@ -74,8 +75,6 @@
                 </tbody>
             </table>
         </br>
-            <button id="btnDownloadTokens" style="background-color: rgb(10, 243, 243); font-size: 20px;">DESCARGAR REPORTE DE TOKENS</button>
-        </br>
             <h3 style="color: rgb(252, 43, 28); font-size: 20px;">REPORTE DE ERRORES</h3>
             <table border="1" id="tableErrores">
                 <tr>
@@ -90,8 +89,6 @@
                 </tbody>
             </table>
         </br>
-            <button id="btnDownloadError" style="background-color: rgb(252, 43, 28); font-size: 20px;">DESCARGAR REPORTE DE ERRORES</button>
-        </br>
             <h3 style="color: rgb(6, 243, 6); font-size: 20px;">RECUENTO DE LEXEMAS</h3>
             <table border="1" id="tableRecuento">
                 <tr>
@@ -105,7 +102,6 @@
                 </tbody>
             </table>
         </br>
-        <button id="btnDownloadError" style="background-color: rgb(6, 243, 6); font-size: 20px;">DESCARGAR REPORTE RECUENTO DE TOKENS</button>
         </div>
     </center>
 

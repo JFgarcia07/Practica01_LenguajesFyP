@@ -30,17 +30,22 @@ document.getElementById("fileInput").addEventListener("change", function(event){
     entrada.readAsText(archivo); //ESTO ES LO QUE LEE EL TEXTO QUE ESTA EN EL ARCHIVO
 });
 
+//METODO QUE ESCRIBIRA LO QUE ESTA EN EL TEXT AREA Y LO LUEGO LO DESCARGARA
 document.getElementById("btnChangeTxt").addEventListener("click", ()=>{
+    //Obtiene el texto del textarea
     let texto = document.getElementById("textarea").value;
 
+    //Se crea un objeto blob, que almacena el contenido y se especifica que sera texto plano
     let blob = new Blob([texto], { type: 'text/plain' });
     let enlace = document.createElement("a");
 
-    enlace.href = URL.createObjectURL(blob);
-    enlace.download = "Texto Modificado - Analizador.txt";
-    document.body.appendChild(enlace);
+    //Se genera un URL temporal a partir del Blob, 
+    enlace.href = URL.createObjectURL(blob); //Permite que el navegador trate al blob como archivo descargable
+    enlace.download = "Texto Modificado - Analizador.txt"; //Es el nombre de como se descargara el archivo
+    //FORZA LA DESCARGA DEL ARCHIVO 
+    document.body.appendChild(enlace); //Se añade temporalmente el enlace al body
     enlace.click();
-    document.body.removeChild(enlace);
+    document.body.removeChild(enlace); // Se elimina el enlace despues de la descarga
 });
 
 

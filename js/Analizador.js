@@ -41,7 +41,8 @@ function tokenYlexemas(entrada) {
             // Procesar cada palabra (parte)
             let num = parseInt(parte, 10);
             
-            if (letras.some(letra => parte.toUpperCase().startsWith(letra))) {
+            if (letras.some(letra => parte.toUpperCase().startsWith(letra)) && (parte !== "AND" && parte !== "OR")) {
+                //Si entra a la condicion entonces se creara un nuevo Token
                 lexemas.push(new Token(parte, "Identificador", fila, columna));
             } else if (num < 10 || num > 0) {
                 lexemas.push(new Token(parte, "Número", fila, columna));
@@ -72,7 +73,13 @@ function tokenYlexemas(entrada) {
 
     return { lexemas, errores };
 }
-
+/**
+ * Esta funcion llenara la tabla pra mostrar los lexemas, así mismo
+ * si encuentra un error no mostrara el reporte de Lexemas
+ * @param {*} lexemas 
+ * @param {*} errores 
+ * @returns 
+ */
 function llenarTablaLexemas(lexemas, errores) {
     let tbody = document.getElementById("tabla-lexemas");
     tbody.innerHTML = ""; 
@@ -98,6 +105,11 @@ function llenarTablaLexemas(lexemas, errores) {
     });
 }
 
+/**
+ * Llenara la tabla de reporte de errores
+ * @param {*} errores 
+ * @returns 
+ */
 function llenarTablaErrores(errores) {
     let tbody = document.getElementById("tabla-errores");
     tbody.innerHTML = ""; 
@@ -118,6 +130,11 @@ function llenarTablaErrores(errores) {
     });
 }
 
+/**
+ * Este metodo contara la cantidad de lexemas que haya en el codigo
+ * @param {*} arrayLexemas 
+ * @param {*} errores 
+ */
 function contadorDeLexemas(arrayLexemas, errores) {
     let simbolos = [];
     let cantidadLexemas = [];
@@ -128,9 +145,11 @@ function contadorDeLexemas(arrayLexemas, errores) {
         let indice = simbolos.indexOf(simbolo); // BUSCA SI YA EXISTE
 
         if (indice === -1) {
+            //Si el simbolo no esta en el arreglo de simbolos, le suma uno al contador de lexemas
             simbolos.push(simbolo);
             cantidadLexemas.push(1);
         } else {
+            //Si esta el simbolo, significa que esta repetido entonces le suma 1 a la cantidad que ya tenia
             cantidadLexemas[indice]++;
         }
     }
@@ -138,6 +157,13 @@ function contadorDeLexemas(arrayLexemas, errores) {
     llenarTablaRecuento(simbolos, cantidadLexemas, errores);
 }
 
+/**
+ * Metodo que llena la tabla de Recuento de Tokens
+ * @param {*} simbolos 
+ * @param {*} cantidadLexemas 
+ * @param {*} errores 
+ * @returns 
+ */
 function llenarTablaRecuento(simbolos, cantidadLexemas, errores) {
     let tbody = document.getElementById("tabla-recuento");
     tbody.innerHTML = "";
